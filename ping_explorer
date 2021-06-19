@@ -1,0 +1,64 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from pythonping import ping
+import time
+
+#google = ping('8.8.8.8')
+#facebook = ping('157.240.2.35')
+#pcp = ping('132.239.12.145')
+#for i in range(2):
+x = []
+y = []
+y2 = []
+y3 = []
+y4 = []
+plt.ion()
+start_time = int(time.time())
+max_length = 10
+j = 0
+
+while j < 1:
+    if (len(x) == max_length):
+        x.pop(0)
+        y.pop(0)
+        y2.pop(0)
+        y3.pop(0)
+        y4.pop(0)
+
+    x.append(int(time.time()) - start_time)
+    #print(x)
+    y.append(ping('8.8.8.8').rtt_avg_ms)
+    y2.append(ping('157.240.2.35').rtt_avg_ms)
+    y3.append(ping('132.239.12.145').rtt_avg_ms)
+    y4.append(ping('128.92.131.126').rtt_avg_ms)
+    #print(y)
+    #print(i, "google: ", ping('8.8.8.8').rtt_avg_ms)
+    #print(i, "facebook: ", ping('157.240.2.35').rtt_avg_ms)
+    #print(i, "pcp: ", ping('132.239.12.145').rtt_avg_ms)
+
+    plt.plot(x, y, label = "google")
+    plt.plot(x, y2, label = "facebook")
+    plt.plot(x, y3, label = "plaza")
+    plt.plot(x, y4, label = "tahoe")
+    plt.legend(loc='best')
+    plt.draw()
+    plt.pause(1)
+    plt.clf()
+
+    
+
+plt.ioff()
+plt.plot(x, y, label = "google")
+plt.plot(x, y2, label = "facebook")
+plt.plot(x, y3, label = "plaza")
+plt.plot(x, y4, label = "tahoe")
+plt.draw()
+plt.legend(loc='best')
+plt.show()
+
+#for i in range(50):
+    #y = np.random.random([10,1])
+    #plt.plot(x, y)
+    #plt.draw()
+    #plt.pause(0.0001)
+    #plt.clf()
